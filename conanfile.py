@@ -9,8 +9,8 @@ class ConanSampleProject(ConanFile):
     generators = "CMakeToolchain", "CMakeDeps"
 
     def requirements(self):
-        self.requires("sfml/2.6.2")
-        self.requires("imgui-sfml/2.6.1")
+        self.requires("sfml/3.0.2")
+        self.requires("imgui-sfml/3.0")
 
     def layout(self):
         cmake_layout(self)
