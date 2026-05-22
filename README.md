@@ -1,38 +1,60 @@
-# conan-sample-project
+# Conan + CMake + SFML 3 + ImGui + ImGui-SFML Template
 
-A project template using **Conan 2 + CMake + SFML + Dear ImGui + ImGui-SFML**.
+A portable project template that works with **any compiler** (GCC, MSVC, Clang) in both **VS Code** and **Visual Studio**.
 
 ## Prerequisites
 
 - [Conan 2](https://conan.io/) (`pip install conan`)
-- CMake 3.21+
-- A C++17 compiler (MSVC, GCC, Clang)
+- CMake 3.23+
+- A C++20 compiler (MSVC, GCC, Clang)
 
-## Build Instructions
+## Setup
+
+Install dependencies for your compiler. Run one or both:
 
 ```bash
-# Install dependencies and generate CMake toolchain
-conan install . --output-folder=build --build=missing
+# For MSVC (Visual Studio default)
+conan install . --build=missing -s build_type=Debug
+conan install . --build=missing -s build_type=Release
 
-# Configure
+# For GCC/MinGW
+conan install . --build=missing --profile=mingw -s build_type=Debug
+conan install . --build=missing --profile=mingw -s build_type=Release
+```
+
+## Build
+
+### VS Code
+1. Open the folder
+2. Select a configure preset (Ctrl+Shift+P → "CMake: Select Configure Preset")
+3. Build (Ctrl+Shift+B or F7)
+
+### Visual Studio
+1. File → Open → CMake → select CMakeLists.txt
+2. Select a configure preset from the toolbar dropdown
+3. Build (Ctrl+B)
+
+### Command Line
+```bash
 cmake --preset conan-default
-# Or manually:
-# cmake -B build -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake
-
-# Build
 cmake --build --preset conan-release
-# Or manually:
-# cmake --build build --config Release
 ```
 
 ## Project Structure
 
 ```
 .
-├── CMakeLists.txt        # CMake build configuration
-├── conanfile.py          # Conan package manager recipe
-├── include/              # Project headers
+├── CMakeLists.txt          # Build configuration
+├── conanfile.py            # Conan dependencies
+├── assets/                 # Runtime assets (copied to output)
+│   └── fonts/
+├── include/                # Project headers
 ├── src/
-│   └── main.cpp          # Application entry point
+│   └── main.cpp            # Entry point
+├── .vscode/settings.json   # VS Code CMake preset config
 └── README.md
 ```
+
+## Adding Dependencies
+
+Edit `conanfile.py` and add to `requirements()`, then re-run `conan install`.
