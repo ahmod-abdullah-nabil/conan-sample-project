@@ -1,5 +1,5 @@
 from conan import ConanFile
-from conan.tools.cmake import CMakeToolchain, CMakeDeps, cmake_layout
+from conan.tools.cmake import cmake_layout
 
 
 class ConanSampleProject(ConanFile):
@@ -9,9 +9,8 @@ class ConanSampleProject(ConanFile):
     generators = "CMakeToolchain", "CMakeDeps"
 
     def requirements(self):
-        self.requires("sfml/2.6.1")
-        self.requires("imgui/1.91.6-docking")
-        self.requires("imgui-sfml/2.6")
+        self.requires("sfml/2.6.2")
+        self.requires("imgui-sfml/2.6.1")
 
     def layout(self):
         cmake_layout(self)
