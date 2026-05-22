@@ -1,4 +1,5 @@
 from conan import ConanFile
+from conan.tools.cmake import cmake_layout
 
 
 class ConanSampleProject(ConanFile):
@@ -10,3 +11,6 @@ class ConanSampleProject(ConanFile):
     def requirements(self):
         self.requires("sfml/3.0.2")
         self.requires("imgui-sfml/3.0")
+
+    def layout(self):
+        cmake_layout(self)
