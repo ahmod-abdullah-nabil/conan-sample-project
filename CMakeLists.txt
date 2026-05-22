@@ -16,3 +16,11 @@ target_link_libraries(${PROJECT_NAME}
         ImGui-SFML::ImGui-SFML
         sfml::sfml
 )
+
+# Copy assets folder next to the executable after build
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_SOURCE_DIR}/assets"
+        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/assets"
+    COMMENT "Copying assets to output directory"
+)
