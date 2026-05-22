@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"E:/Github & Projects/conan-sample-project/build/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

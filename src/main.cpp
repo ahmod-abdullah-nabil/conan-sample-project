@@ -3,7 +3,7 @@
 #include <imgui-SFML.h>
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Conan + SFML + ImGui");
+    sf::RenderWindow window(sf::VideoMode({1280, 720}), "Conan + SFML + ImGui");
     window.setFramerateLimit(60);
 
     if (!ImGui::SFML::Init(window)) {
@@ -13,11 +13,10 @@ int main() {
     sf::Clock deltaClock;
 
     while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            ImGui::SFML::ProcessEvent(window, event);
+        while (const auto event = window.pollEvent()) {
+            ImGui::SFML::ProcessEvent(window, *event);
 
-            if (event.type == sf::Event::Closed) {
+            if (event->is<sf::Event::Closed>()) {
                 window.close();
             }
         }
@@ -29,7 +28,7 @@ int main() {
 
         // --- Custom window ---
         ImGui::Begin("Hello");
-        ImGui::Text("Hello from ImGui + SFML + Conan!");
+        ImGui::Text("Hello from ImGui + SFML 3 + Conan!");
         ImGui::End();
 
         window.clear(sf::Color(30, 30, 30));
