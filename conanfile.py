@@ -10,6 +10,7 @@ class ConanSampleProject(ConanFile):
 
     def requirements(self):
         self.requires("sfml/3.0.2")
+        self.requires("imgui/1.91.8-docking", override=True)
         self.requires("imgui-sfml/3.0")
 
     def layout(self):
